@@ -26,8 +26,9 @@ void svg_rect(double x, double y, double width, double height,
 }
 
 void
-show_histogram_svg(const vector<size_t>& bins) {
-    const auto IMAGE_WIDTH = 400;
+show_histogram_svg(const vector<size_t>& bins, size_t number_count) {
+    const auto IMAGE_WIDTH = 500;
+    const auto IMAGE_WIDTH_H = 400;
     const auto IMAGE_HEIGHT = 300;
     const auto TEXT_LEFT = 20;
     const auto TEXT_BASELINE = 20;
@@ -46,16 +47,19 @@ show_histogram_svg(const vector<size_t>& bins) {
     double top = 0;
     const double max_bin_width = BLOCK_WIDTH * max_bin;
     for (size_t bin : bins) {
+        size_t percent=(bin*100)/number_count;
          if(bin==max_bin){
                 svg_text(TEXT_LEFT, top+TEXT_BASELINE, to_string(max_bin));
-                svg_rect(TEXT_WIDTH, top,IMAGE_WIDTH, BIN_HEIGHT);
+                svg_rect(TEXT_WIDTH, top,IMAGE_WIDTH_H, BIN_HEIGHT);
+                svg_text(TEXT_LEFT+BIN_HEIGHT+IMAGE_WIDTH_H,top+TEXT_BASELINE, to_string(percent)+'%');
         }
              else{
 
                 const double bin_width = BLOCK_WIDTH * bin;
-                const double IMAGE_WIDTH_bin=IMAGE_WIDTH*(bin_width/max_bin_width);
+                const double IMAGE_WIDTH_bin=IMAGE_WIDTH_H*(bin_width/max_bin_width);
                 svg_text(TEXT_LEFT, top+TEXT_BASELINE, to_string(bin));
                 svg_rect(TEXT_WIDTH, top, IMAGE_WIDTH_bin, BIN_HEIGHT,"black","green");
+                svg_text(TEXT_LEFT+BIN_HEIGHT+IMAGE_WIDTH_bin,top+TEXT_BASELINE, to_string(percent)+'%');
              }
         top += BIN_HEIGHT;
     }

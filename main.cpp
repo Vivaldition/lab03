@@ -24,6 +24,8 @@ make_info_text() {
     DWORD info=GetVersion();
     DWORD mask = 0b00000000'00000000'11111111'11111111;
     DWORD version = info & mask;
+    DWORD version_M = version& 0x00ff;
+    DWORD version_m =(version& 0x0000ffff)>>8;
     // TODO: получить версию системы, записать в буфер.
     // TODO: получить имя компьютера, записать в буфер.
     return buffer.str();

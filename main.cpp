@@ -30,6 +30,7 @@ f_bins(istream& in,int argc, char* argv[]){
     }
     return data;
 }
+
 Input
 read_input(istream& in,bool prompt) {
     Input data;

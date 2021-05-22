@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <curl/curl.h>
 
 #include "histogram.h"
 #include "svg.h"
@@ -32,7 +33,11 @@ if(prompt)
      return data;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    curl_global_init(CURL_GLOBAL_ALL);
+    if (argc>1)
+        for(int i=0; i<argc; i++)
+            cout<<"argv["<<i<<"] = "<<argv[i]<<endl;
     const auto input= read_input(cin,true);
     const auto bins = make_histogram(input);
     //show_histogram_text(bins);

@@ -26,6 +26,11 @@ make_info_text() {
     DWORD version = info & mask;
     DWORD version_M = version& 0x00ff;
     DWORD version_m =(version& 0x0000ffff)>>8;
+    DWORD platform = info >> 16;
+    DWORD build;
+    if ((info & 0x8000) == 0)
+        build = platform;
+    buffer<< "Windows v"<< version_M<<"."<< version_m<<" (build "<< build<<")";
     // TODO: получить версию системы, записать в буфер.
     // TODO: получить имя компьютера, записать в буфер.
     return buffer.str();

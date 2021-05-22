@@ -21,7 +21,9 @@ input_numbers(size_t count) {
 string
 make_info_text() {
     stringstream buffer;
-    printf("%u \n%x",GetVersion(),GetVersion());
+    DWORD info=GetVersion();
+    DWORD mask = 0b00000000'00000000'11111111'11111111;
+    DWORD version = info & mask;
     // TODO: получить версию системы, записать в буфер.
     // TODO: получить имя компьютера, записать в буфер.
     return buffer.str();

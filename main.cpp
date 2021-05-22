@@ -18,6 +18,19 @@ input_numbers(istream& in,size_t count) {
 }
 
 Input
+f_bins(istream& in,int argc, char* argv[]){
+    Input data;
+    string _bins=argv[1];
+    if(_bins=="-bins" && argc>3) {
+        size_t bin_count;
+        data.bin_count=atoi(argv[2]);
+    }
+    else if(argc<3){
+    cout<<"You need to enter the quantity\n";
+    }
+    return data;
+}
+Input
 read_input(istream& in,bool prompt) {
     Input data;
 if(prompt)
@@ -63,9 +76,10 @@ Input download(const string& address) {
 }
 
 int main(int argc, char* argv[]) {
-    Input input;
+    Input input,data;
     if (argc>1){
-         input = download(argv[1]);
+        input=f_bins(cin,argc,argv);
+        input = download(argv[1]);
     } else {
         input = read_input(cin, true);
     }

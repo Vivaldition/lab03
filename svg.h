@@ -1,6 +1,8 @@
 #ifndef SVG_H_INCLUDED
 #define SVG_H_INCLUDED
 
+string
+make_info_text();
 void
 svg_begin(double width, double height);
 void

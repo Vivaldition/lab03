@@ -30,9 +30,11 @@ make_info_text() {
     DWORD build;
     if ((info & 0x8000) == 0)
         build = platform;
-    buffer<< "Windows v"<< version_M<<"."<< version_m<<" (build "<< build<<")";
-    // TODO: получить версию системы, записать в буфер.
-    // TODO: получить имя компьютера, записать в буфер.
+    DWORD DL= MAX_COMPUTERNAME_LENGTH+1;
+    char ComputerName[DL];
+    GetComputerNameA(ComputerName,&DL);
+    buffer<< "Windows v"<< version_M<<"."<< version_m<<" (build "<< build<<")"
+    <<"\nComputer name "<<ComputerName;
     return buffer.str();
 }
 

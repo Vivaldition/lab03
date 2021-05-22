@@ -26,7 +26,7 @@ void svg_rect(double x, double y, double width, double height,
 }
 
 void
-show_histogram_svg(const vector<size_t>& bins) {
+show_histogram_svg(const vector<size_t> &bins) {
     const auto IMAGE_WIDTH = 400;
     const auto IMAGE_HEIGHT = 300;
     const auto TEXT_LEFT = 20;
@@ -44,18 +44,16 @@ show_histogram_svg(const vector<size_t>& bins) {
     }
 
     double top = 0;
-    const double max_bin_width = BLOCK_WIDTH * max_bin;
+   // const double max_bin_width = BLOCK_WIDTH * max_bin;
     for (size_t bin : bins) {
+             svg_text(TEXT_LEFT, top+TEXT_BASELINE, to_string(bin));
          if(bin==max_bin){
-                svg_text(TEXT_LEFT, top+TEXT_BASELINE, to_string(max_bin));
                 svg_rect(TEXT_WIDTH, top,IMAGE_WIDTH, BIN_HEIGHT);
         }
              else{
-
-                const double bin_width = BLOCK_WIDTH * bin;
-                const double IMAGE_WIDTH_bin=IMAGE_WIDTH*(bin_width/max_bin_width);
-                svg_text(TEXT_LEFT, top+TEXT_BASELINE, to_string(bin));
-                svg_rect(TEXT_WIDTH, top, IMAGE_WIDTH_bin, BIN_HEIGHT,"black","green");
+               // const double bin_width = BLOCK_WIDTH * bin;
+               // const double IMAGE_WIDTH_bin=(IMAGE_WIDTH*bin_width)/max_bin_width;
+                svg_rect(TEXT_WIDTH, top,IMAGE_WIDTH*bin/max_bin , BIN_HEIGHT,"black","black");
              }
         top += BIN_HEIGHT;
     }
